@@ -5,7 +5,7 @@
     <br>
     <a href=https://youtu.be/hbtKzElYKkQ?si=ZlqvtUVhhJbAju0S>Video</a>
     <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-    <a href="">Paper</a>
+    <a href="https://github.com/kevin2431/Traj-LO/blob/main/doc/paper/Traj-LO.pdf">Paper</a>
     <br>
     <br>
     <img src="doc/image/trajectory.png" width="50%" height="auto" alt="Trajectory Image">
