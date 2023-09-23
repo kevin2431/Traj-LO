@@ -20,6 +20,14 @@ Besides, the framework is generalized for different kinds of LiDAR as well as mu
 ### The source code will be uploaded after the paper is accepted. But we will upload the binary package for your testing soon.
 
 
+**Video demo** [Youtube](https://www.youtube.com/watch?v=hbtKzElYKkQ) [Bilibili](https://www.bilibili.com/video/BV1Ky4y1F7uT)
+<div align="center">
+    <a href="https://www.youtube.com/watch?v=hbtKzElYKkQ">
+        <img src="http://img.youtube.com/vi/hbtKzElYKkQ/0.jpg" width="640" height="480" alt="Video Cover">
+    </a>
+</div>
+
+
 
 
 
