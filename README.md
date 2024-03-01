@@ -18,9 +18,16 @@ By coupling the geometric information from streaming LiDAR points and kinematic 
 Besides, the framework is generalized for different kinds of LiDAR as well as multi-LiDAR systems.
 
 ## News: Traj-LO is accepted to [RA-L](https://ieeexplore.ieee.org/document/10387726)
-As previously promised, the code for this project will be made open source. Due to my current focus on preparing for my doctoral dissertation, the upload of the code will not be delayed beyond March 1st, 2024.
+**2024.3.1** Sorry guys. Apologies for the delay in releasing the code, as I am currently managing numerous tasks before my graduation. I will endeavor to refactor the code in this March. Thank you for your attention to our work. 
 
-Thanks for your attention.
+For those interested in multi-sensor fusion, particularly in multi-LiDAR and multi-IMU systems, I recommend checking out my latest work, [Traj-LIO](https://arxiv.org/abs/2402.09189), which is a resilient state estimator through sparse Gaussian Processes.
+
+
+
+
+
+
+
 
 
 **Video demo** [Youtube](https://www.youtube.com/watch?v=hbtKzElYKkQ) [Bilibili](https://www.bilibili.com/video/BV1Ky4y1F7uT)
