@@ -1,0 +1,28 @@
+# the config file for Livox Lidar which message type is livox_ros_driver/CustomMsg.h
+# support Livox Mid-70, Horizon, Avia
+dataset:
+  data_type: "bag_livox"
+  topic: "/livox/lidar"
+  path: "/home/zx/Data/Disk1/r3live/hkust_campus_seq_01.bag"
+
+trajectory:
+  init_interval: 3e8
+  seg_interval: 4e7
+  seg_num: 3
+  kinematic_constrain: 2.0
+  init_pose_weight: 1e9
+  converge_thresh: 0.001
+  max_iterations: 25
+
+mapping:
+  ds_size: 0.5
+  voxel_size: 0.5
+  max_voxel_num: 20
+  planer_thresh: 0.1
+  max_range: 120
+  min_range: 1
+
+vis:
+  frame_num: 1
+  point_num: 5
+

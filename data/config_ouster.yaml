@@ -1,0 +1,31 @@
+# the config file for Ouster Lidar which message type is sensor_msgs/PointCloud2.h
+# support Dataset: Hilti 2021, New College, NTU VIRAL
+dataset:
+  data_type: "bag_ouster"
+  topic: "/os_cloud_node/points"
+  path: "/home/zx/Data/Disk2/hilti-2021/Campus_2.bag"
+
+trajectory:
+  init_interval: 3e8
+  seg_interval: 4e7
+  seg_num: 3
+  kinematic_constrain: 2.0
+  init_pose_weight: 1e9
+  converge_thresh: 0.001
+  max_iterations: 25
+
+mapping:
+  ds_size: 0.5
+  voxel_size: 0.5
+  max_voxel_num: 20
+  planer_thresh: 0.1
+  max_range: 120
+  min_range: 1
+
+vis:
+  frame_num: 1
+  point_num: 10
+
+
+
+
