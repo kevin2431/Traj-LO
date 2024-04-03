@@ -107,7 +107,7 @@ For those interested in multi-sensor fusion, particularly in multi-LiDAR and mul
 Traj-LO is currently in beta version, and we are actively working on it. We welcome community users to participate in this project.
 
 ## Acknowledgement
-Thanks for these pioneering works [Basalt](https://cvg.cit.tum.de/research/vslam/basalt) (Batch Optimization), [CT-ICP]() (Continuous-time Idea), and [KISS-ICP]() (VoxelMap Management).
+Thanks for these pioneering works [Basalt](https://cvg.cit.tum.de/research/vslam/basalt) (Batch Optimization), [CT-ICP](https://github.com/jedeschaud/ct_icp) (Continuous-time Idea), and [KISS-ICP](https://github.com/PRBonn/kiss-icp) (VoxelMap Management).
 
 
 
