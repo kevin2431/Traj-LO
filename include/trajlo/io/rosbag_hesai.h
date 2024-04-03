@@ -43,7 +43,6 @@ class RosbagHesai : public DataLoader {
 
   void pubHesai(const std::string &path, const std::string &point_topic) {
     while (!is_pub_) {
-      // 后续可以用条件变量来控制
       std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 

@@ -89,7 +89,6 @@ class RosbagLivox : public DataLoader {
         scan->points.resize(scan->size);
 
         for (size_t j = 0; j < scan->size; ++j) {
-          // 这里就去除异常点吧  高度，距离判定
           scan->points[j].x = livox_msg_in->points[j].x;
           scan->points[j].y = livox_msg_in->points[j].y;
           scan->points[j].z = livox_msg_in->points[j].z;

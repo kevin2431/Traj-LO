@@ -291,7 +291,6 @@ void TrajLOdometry::Marginalize() {
 
     Eigen::VectorXd delta = frame_poses_[tp.first].getDelta();
 
-    // marg操作,先不考虑线性化点的问题
     Eigen::Matrix<double, 12, 12> marg_H_new =
         measurements.begin()->second->delta_H;
     Eigen::Matrix<double, 12, 1> marg_b_new =
@@ -299,7 +298,7 @@ void TrajLOdometry::Marginalize() {
     marg_H_new.topLeftCorner<POSE_SIZE, POSE_SIZE>() += marg_H;
 
     marg_b_new.head<POSE_SIZE>() -= marg_b;
-    marg_b_new.head<POSE_SIZE>() -= (marg_H * delta);  // 这是正确的
+    marg_b_new.head<POSE_SIZE>() -= (marg_H * delta);
 
     Eigen::MatrixXd H_mm_inv =
         marg_H_new.topLeftCorner<6, 6>().fullPivLu().solve(
@@ -312,17 +311,12 @@ void TrajLOdometry::Marginalize() {
         marg_H_new.bottomLeftCorner<6, 6>() * marg_H_new.topRightCorner<6, 6>();
     marg_b -= marg_H_new.bottomLeftCorner<6, 6>() * marg_b_new.head<6>();
 
-    //    std::cout<<"===========================\n";
-    //    std::cout<<marg_H<<std::endl;
 
     // erase
     frame_poses_.erase(tp.first);
     measurements.erase(tp);
 
-    // 带时间戳的轨迹
     trajectory_.emplace_back(tp.first, pp.first);
-
-    // 固定典型化点
     frame_poses_[tp.second].setLinTrue();
   }
 }
@@ -385,7 +379,7 @@ void TrajLOdometry::UndistortRawPoints(std::vector<PointXYZIT>& pc_in,
       float alpha = (p.ts - begin_ts) / interv;
       Eigen::Vector3f point(p.x, p.y, p.z);
       if (point.hasNaN() || point.squaredNorm() < 4) continue;
-      // 去畸变
+
       Sophus::SE3f T_b_i = Sophus::se3_expd(alpha * tau);
       point = T_b_i * point;
       PointXYZI po{point(0), point(1), point(2), p.intensity};

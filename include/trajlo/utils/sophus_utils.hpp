@@ -1,7 +1,8 @@
 /*
  * This file is modified from the Basalt project.
  * https://gitlab.com/VladyslavUsenko/basalt-headers.git
- *
+ * which is under BSD 3-Clause License.
+ * Copyright (c) 2019, Vladyslav Usenko and Nikolaus Demmel.
  * */
 
 #pragma once
@@ -10,15 +11,15 @@
 
 namespace Sophus {
 
+template <typename Scalar>
+SOPHUS_FUNC inline typename SE3<Scalar>::Tangent se3_logd(
+    const SE3<Scalar> &se3) {
+  typename SE3<Scalar>::Tangent upsilon_omega;
+  upsilon_omega.template tail<3>() = se3.so3().log();
+  upsilon_omega.template head<3>() = se3.translation();
 
-    template <typename Scalar>
-    SOPHUS_FUNC inline typename SE3<Scalar>::Tangent se3_logd(const SE3<Scalar> &se3) {
-      typename SE3<Scalar>::Tangent upsilon_omega;
-      upsilon_omega.template tail<3>() = se3.so3().log();
-      upsilon_omega.template head<3>() = se3.translation();
-
-      return upsilon_omega;
-    }
+  return upsilon_omega;
+}
 
 template <typename Derived>
 SOPHUS_FUNC inline SE3<typename Derived::Scalar> se3_expd(
@@ -33,8 +34,9 @@ SOPHUS_FUNC inline SE3<typename Derived::Scalar> se3_expd(
 }
 
 template <typename Derived1, typename Derived2>
-SOPHUS_FUNC inline void rightJacobianSO3(const Eigen::MatrixBase<Derived1> &phi,
-                             const Eigen::MatrixBase<Derived2> &J_phi) {
+SOPHUS_FUNC inline void rightJacobianSO3(
+    const Eigen::MatrixBase<Derived1> &phi,
+    const Eigen::MatrixBase<Derived2> &J_phi) {
   EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived1);
   EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived2);
   EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived1, 3);
@@ -42,9 +44,9 @@ SOPHUS_FUNC inline void rightJacobianSO3(const Eigen::MatrixBase<Derived1> &phi,
 
   using Scalar = typename Derived1::Scalar;
 
-  using std::sqrt;
   using std::cos;
   using std::sin;
+  using std::sqrt;
 
   Eigen::MatrixBase<Derived2> &J =
       const_cast<Eigen::MatrixBase<Derived2> &>(J_phi);
@@ -69,8 +71,9 @@ SOPHUS_FUNC inline void rightJacobianSO3(const Eigen::MatrixBase<Derived1> &phi,
 }
 
 template <typename Derived1, typename Derived2>
-SOPHUS_FUNC inline void rightJacobianInvSO3(const Eigen::MatrixBase<Derived1> &phi,
-                                const Eigen::MatrixBase<Derived2> &J_phi) {
+SOPHUS_FUNC inline void rightJacobianInvSO3(
+    const Eigen::MatrixBase<Derived1> &phi,
+    const Eigen::MatrixBase<Derived2> &J_phi) {
   EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived1);
   EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived2);
   EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived1, 3);
@@ -78,12 +81,10 @@ SOPHUS_FUNC inline void rightJacobianInvSO3(const Eigen::MatrixBase<Derived1> &p
 
   using Scalar = typename Derived1::Scalar;
 
-    using std::sqrt;
-    using std::cos;
-    using std::sin;
+  using std::cos;
+  using std::sin;
+  using std::sqrt;
 
-
-    // Eigen里面处理矩阵的技巧
   Eigen::MatrixBase<Derived2> &J =
       const_cast<Eigen::MatrixBase<Derived2> &>(J_phi);
 
@@ -102,12 +103,13 @@ SOPHUS_FUNC inline void rightJacobianInvSO3(const Eigen::MatrixBase<Derived1> &p
     // Technically, log(exp(phi)exp(epsilon)) is not continuous / differentiable
     // at phi=pi, but we still aim to return a reasonable value for all valid
     // inputs.
-//    BASALT_ASSERT(phi_norm <= M_PI + Sophus::Constants<Scalar>::epsilon());
+    //    BASALT_ASSERT(phi_norm <= M_PI +
+    //    Sophus::Constants<Scalar>::epsilon());
 
     if (phi_norm < M_PI - Sophus::Constants<Scalar>::epsilonSqrt()) {
       // regular case for range (0,pi)
-      J += phi_hat2 * (1 / phi_norm2 - (1 + cos(phi_norm)) /
-                                           (2 * phi_norm * sin(phi_norm)));
+      J += phi_hat2 * (1 / phi_norm2 -
+                       (1 + cos(phi_norm)) / (2 * phi_norm * sin(phi_norm)));
     } else {
       // 0th-order Taylor expansion around pi
       J += phi_hat2 / (M_PI * M_PI);
@@ -119,8 +121,9 @@ SOPHUS_FUNC inline void rightJacobianInvSO3(const Eigen::MatrixBase<Derived1> &p
 }
 
 template <typename Derived1, typename Derived2>
-SOPHUS_FUNC inline void leftJacobianSO3(const Eigen::MatrixBase<Derived1> &phi,
-                            const Eigen::MatrixBase<Derived2> &J_phi) {
+SOPHUS_FUNC inline void leftJacobianSO3(
+    const Eigen::MatrixBase<Derived1> &phi,
+    const Eigen::MatrixBase<Derived2> &J_phi) {
   EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived1);
   EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived2);
   EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived1, 3);
@@ -128,12 +131,11 @@ SOPHUS_FUNC inline void leftJacobianSO3(const Eigen::MatrixBase<Derived1> &phi,
 
   using Scalar = typename Derived1::Scalar;
 
-    using std::sqrt;
-    using std::cos;
-    using std::sin;
+  using std::cos;
+  using std::sin;
+  using std::sqrt;
 
-
-    Eigen::MatrixBase<Derived2> &J =
+  Eigen::MatrixBase<Derived2> &J =
       const_cast<Eigen::MatrixBase<Derived2> &>(J_phi);
 
   Scalar phi_norm2 = phi.squaredNorm();
@@ -155,10 +157,10 @@ SOPHUS_FUNC inline void leftJacobianSO3(const Eigen::MatrixBase<Derived1> &phi,
   }
 }
 
-
 template <typename Derived1, typename Derived2>
-SOPHUS_FUNC inline void leftJacobianInvSO3(const Eigen::MatrixBase<Derived1> &phi,
-                               const Eigen::MatrixBase<Derived2> &J_phi) {
+SOPHUS_FUNC inline void leftJacobianInvSO3(
+    const Eigen::MatrixBase<Derived1> &phi,
+    const Eigen::MatrixBase<Derived2> &J_phi) {
   EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived1);
   EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived2);
   EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived1, 3);
@@ -166,12 +168,11 @@ SOPHUS_FUNC inline void leftJacobianInvSO3(const Eigen::MatrixBase<Derived1> &ph
 
   using Scalar = typename Derived1::Scalar;
 
-    using std::sqrt;
-    using std::cos;
-    using std::sin;
+  using std::cos;
+  using std::sin;
+  using std::sqrt;
 
-
-    Eigen::MatrixBase<Derived2> &J =
+  Eigen::MatrixBase<Derived2> &J =
       const_cast<Eigen::MatrixBase<Derived2> &>(J_phi);
 
   Scalar phi_norm2 = phi.squaredNorm();
@@ -189,12 +190,13 @@ SOPHUS_FUNC inline void leftJacobianInvSO3(const Eigen::MatrixBase<Derived1> &ph
     // Technically, log(exp(phi)exp(epsilon)) is not continuous / differentiable
     // at phi=pi, but we still aim to return a reasonable value for all valid
     // inputs.
-//    BASALT_ASSERT(phi_norm <= M_PI + Sophus::Constants<Scalar>::epsilon());
+    //    BASALT_ASSERT(phi_norm <= M_PI +
+    //    Sophus::Constants<Scalar>::epsilon());
 
     if (phi_norm < M_PI - Sophus::Constants<Scalar>::epsilonSqrt()) {
       // regular case for range (0,pi)
-      J += phi_hat2 * (1 / phi_norm2 - (1 + cos(phi_norm)) /
-                                           (2 * phi_norm * sin(phi_norm)));
+      J += phi_hat2 * (1 / phi_norm2 -
+                       (1 + cos(phi_norm)) / (2 * phi_norm * sin(phi_norm)));
     } else {
       // 0th-order Taylor expansion around pi
       J += phi_hat2 / (M_PI * M_PI);
@@ -204,7 +206,6 @@ SOPHUS_FUNC inline void leftJacobianInvSO3(const Eigen::MatrixBase<Derived1> &ph
     J += phi_hat2 / 12;
   }
 }
-
 
 template <typename Derived1, typename Derived2>
 SOPHUS_FUNC inline void rightJacobianSE3Decoupled(
@@ -227,7 +228,6 @@ SOPHUS_FUNC inline void rightJacobianSE3Decoupled(
   J.template topLeftCorner<3, 3>() =
       Sophus::SO3<Scalar>::exp(omega).inverse().matrix();
 }
-
 
 template <typename Derived1, typename Derived2>
 SOPHUS_FUNC inline void rightJacobianInvSE3Decoupled(

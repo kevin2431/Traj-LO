@@ -42,7 +42,7 @@ The provided ROSbag data loader supports different types of LiDAR, including Liv
 
 After modifying the config file for your environment, you can run Traj-LO as follows:
 ```
-./run_trajlo ../data/config_livox.yaml
+./trajlo ../data/config_livox.yaml
 ```
 
 ## Citation

@@ -1,6 +1,8 @@
 /**
-This file is modified from the Basalt project.
-https://gitlab.com/VladyslavUsenko/basalt-headers.git
+This file is modified from the Basalt project,
+https://gitlab.com/VladyslavUsenko/basalt-headers.git,
+which is under BSD 3-Clause License.
+Copyright (c) 2019, Vladyslav Usenko and Nikolaus Demmel.
 
 MIT License
 

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.10)
 
 add_subdirectory(ros EXCLUDE_FROM_ALL)
 add_subdirectory(yaml-cpp)

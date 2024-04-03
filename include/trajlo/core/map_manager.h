@@ -20,6 +20,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+* Note:
+* The `struct VoxelBlock`, `VoxelHash`, and functions `UpdateModelDeviation`,
+* `ComputeModelError`, `ComputeThreshold`, which compute the threshold parameter
+* for point registration, are copied from the work KISS-ICP
+(https://github.com/PRBonn/kiss-icp),
+* which is licensed under the MIT License.
+*
+* Copyright (c) 2022 Ignacio Vizzo, Tiziano Guadagnino, Benedikt Mersch, Cyrill
+Stachniss.
+*
+* The implementation of the map structure in this file is heavily inspired by
+the work KISS-ICP.
+* Thanks for their great effort and for open sourcing the code for the
+community.
+
 */
 
 #ifndef TRAJLO_MAP_MANAGER_H
@@ -39,6 +55,8 @@ class MapManager {
   using Ptr = std::shared_ptr<MapManager>;
   using Voxel = Eigen::Vector3i;
 
+  // VoxelBlock and VoxelHash are copied from the work KISS-ICP
+  // (https://github.com/PRBonn/kiss-icp),
   struct VoxelBlock {
     // buffer of points with a max limit of n_points
     std::vector<Eigen::Vector3d> points;
