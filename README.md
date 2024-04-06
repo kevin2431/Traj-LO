@@ -22,11 +22,13 @@
 ## What is Traj-LO
 **Traj-LO aims to explore the limits of state estimation using only LiDAR sensors.**
 
+Nowadays, LO approaches heavily rely on IMU data for accurate state estimation but neglect the true capabilities of LiDAR sensors. Through the continuous-time perspective, Traj-LO matches the performance of state-of-the-art LIO methods in diverse scenarios.
+
 The spatial-temporal movement of LiDAR is parameterized by a simple yet effective continuous-time trajectory, which consists of multiple piecewise linear functions.
 By coupling the geometric information from streaming LiDAR points and kinematic constraints from trajectory smoothness, it can work even in scenarios where the motion state exceeds the IMU's measuring range.
 Besides, the framework is generalized for different kinds of LiDAR as well as multi-LiDAR systems.
 ## How to use Traj-LO
-In contrast to other LiDAR odometry methods, Traj-LO is a ROS-independent project and is suitable for cross-platform applications. For convenience, we provide a ROSbag data loader that can read public datasets and your own recorded data.
+Traj-LO is a ROS-independent project and is suitable for cross-platform applications. For convenience, we provide a ROSbag data loader that can read public datasets and your own recorded data.
 
 ### Supported Dataset
 Currently, the released code only supports one LiDAR configuration. We will update it as soon as possible to provide multi-LiDAR support. The provided ROSbag data loader supports different types of LiDAR, including Livox, Ouster, Hesai, Robosense, and Velodyne. We have tested Traj-LO with the following datasets.
@@ -71,6 +73,10 @@ After modifying the config file for your environment, you can run Traj-LO. Here 
 ./trajlo ../data/config_livox.yaml
 ```
 
+### Some Tips
+- Traj-LO is a continuous-time method, so each point in your rosbag should have a corresponding timestamp.
+- When the motion profile is aggressive, you can decrease `seg_interval` or increase `kinematic_constraint`.
+
 ## Cross-platform Support
 ### Linux
 Ubuntu 20.04, 22.04
@@ -109,7 +115,7 @@ Traj-LO is currently in beta version, and we are actively working on it. We welc
 ## Acknowledgement
 Thanks for these pioneering works [Basalt](https://cvg.cit.tum.de/research/vslam/basalt) (Batch Optimization), [CT-ICP](https://github.com/jedeschaud/ct_icp) (Continuous-time Idea), and [KISS-ICP](https://github.com/PRBonn/kiss-icp) (VoxelMap Management).
 
-
+[![Star History Chart](https://api.star-history.com/svg?repos=kevin2431/Traj-LO&type=Date)](https://star-history.com/#kevin2431/Traj-LO&Date)
 
 
 
