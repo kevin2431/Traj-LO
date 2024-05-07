@@ -59,7 +59,7 @@ You can install the Traj-LO project by following these steps:
 ```
 git clone --recursive https://github.com/kevin2431/Traj-LO.git
 cd Traj-LO
-sh scripts/install_deps.sh # make sure we have all the dependency
+./scripts/install_deps.sh # make sure we have all the dependency
 mkdir build && cd build
 cmake .. 
 make -j8
