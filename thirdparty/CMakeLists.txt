@@ -30,7 +30,7 @@ target_link_libraries(imgui PUBLIC
 add_subdirectory(glm)
 add_subdirectory(robin-map)
 
-set(TBB_TEST OFF)
+option(TBB_TEST "Enable testing" OFF)
 add_subdirectory(oneTBB)
 
 
