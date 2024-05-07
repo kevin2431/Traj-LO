@@ -34,6 +34,9 @@ bool Visualizer::windowInit() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
 
+  // setting forward-compatible core profile context (necessary for macos)
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
   GLFWmonitor* MyMonitor =
       glfwGetPrimaryMonitor();  // The primary monitor.. Later Occulus?..
 
@@ -95,7 +98,7 @@ bool Visualizer::imGuiInit() {
   }
 
   // Setup Platform/Renderer backends
-  const char* glsl_version = "#version 130";  // shader 语言
+  const char* glsl_version = "#version 150";  // mac need shader version >=140
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init(glsl_version);
 

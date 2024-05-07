@@ -51,15 +51,15 @@ Since Traj-LO is a LiDAR-only method, it may fail in narrow spaces where there a
 In addition to the ROSbag data loader, Traj-LO also provides a simple custom GUI for visualization and uses Eigen-based Gauss-Newton for pose optimization. Here are the major libraries we will use.
 - Optimization: [Eigen](https://gitlab.com/libeigen/eigen.git), [Sophus](https://github.com/strasdat/Sophus.git)
 - GUI: [ImGui](https://github.com/ocornut/imgui), OpenGL, [GLM](https://github.com/g-truc/glm.git)
-- DataLoader: TBB, Boost
+- DataLoader: oneTBB, Boost
 
-Although major dependencies are included in the third-party folder, you may still need to run the script `install_deps_ubuntu.sh` to install libraries like TBB, Boost, etc.
+Although major dependencies are included in the third-party folder, you may still need to run the script `install_deps.sh` to install libraries like Boost, etc.
 ### Build
 You can install the Traj-LO project by following these steps:
 ```
 git clone --recursive https://github.com/kevin2431/Traj-LO.git
 cd Traj-LO
-sh install_deps_ubuntu.sh # make sure we have all the dependency
+sh scripts/install_deps.sh # make sure we have all the dependency
 mkdir build && cd build
 cmake .. 
 make -j8
@@ -83,7 +83,7 @@ Ubuntu 20.04, 22.04
 ### Windows
 You can use [WSL2](https://learn.microsoft.com/zh-cn/windows/wsl/about) to install the Ubuntu subsystem and then follow the above instructions to test Traj-LO. To enable OpenGL accelerated rendering in WSLg, you may need to [select Nvidia GPU](https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg).
 ### MacOS
-Still working on it!
+Make sure you have [Homebrew](https://brew.sh/) to run the srcipt `install_deps.sh`to install dependencies. We have tested Traj-LO on M2 Mac Mini (macOS 14.4.1).
 ### ROS
 Still working on it!
 
