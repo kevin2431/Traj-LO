@@ -32,22 +32,11 @@ endif ()
 
 project(TrajLO LANGUAGES C CXX)
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules/" ${CMAKE_MODULE_PATH})
-
 if (NOT CXX_MARCH)
     set(CXX_MARCH native)
 endif ()
 
 add_subdirectory(thirdparty)
-
-# tbb
-find_package(TBB REQUIRED)
-include_directories(${TBB_INCLUDE_DIR})
-message(STATUS "TBB_INTERFACE_VERSION: ${TBB_INTERFACE_VERSION}")
-if (TBB_INTERFACE_VERSION LESS 11004)
-    # enable global_control header for earlier TBB versions (Ubuntu 16.04, 18.04)
-    add_definitions(-DTBB_PREVIEW_GLOBAL_CONTROL)
-endif ()
 
 include_directories(include)
 
@@ -70,4 +59,5 @@ target_link_libraries(trajlo PUBLIC
         pthread
         imgui glm::glm
         PRIVATE tsl::robin_map
+        TBB::tbb
 )

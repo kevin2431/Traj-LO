@@ -13,3 +13,6 @@
 [submodule "thirdparty/robin-map"]
 	path = thirdparty/robin-map
 	url = https://github.com/Tessil/robin-map.git
+[submodule "thirdparty/oneTBB"]
+	path = thirdparty/oneTBB
+	url = https://github.com/oneapi-src/oneTBB.git
