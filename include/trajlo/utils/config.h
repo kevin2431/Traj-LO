@@ -28,6 +28,8 @@ SOFTWARE.
 #include <string>
 #include <vector>
 
+#include <sophus/se3.hpp>
+
 namespace traj {
 struct TrajConfig {
   TrajConfig() = default;
@@ -37,6 +39,14 @@ struct TrajConfig {
   std::string type;
   std::string topic;
   std::string dataset_path;
+
+  bool save_pose;
+  std::string pose_file_path;
+
+  // calibration:
+  double time_offset;
+  Sophus::SE3d T_body_lidar;
+  Sophus::SE3d T_body_gt;
 
   // trajectory
   double init_interval;
@@ -58,8 +68,7 @@ struct TrajConfig {
   // vis
   int frame_num;
   int point_num;
-//  int width;
-//  int height;
+  Sophus::SE3d T_vis_lidar;
 };
 }  // namespace traj
 

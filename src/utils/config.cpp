@@ -34,6 +34,27 @@ namespace traj {
         topic=config["dataset"]["topic"].as<std::string>();
         dataset_path = config["dataset"]["path"].as<std::string>();
 
+        save_pose=config["dataset"]["save_pose"].as<bool>();
+        pose_file_path=config["dataset"]["pose_file_path"].as<std::string>();
+
+        // read calibration config
+        time_offset=config["calibration"]["time_offset"].as<double>();
+        std::vector<double> tmp=config["calibration"]["T_body_lidar"].as<std::vector<double>>();
+        Eigen::Matrix4d M44_lidar;
+        M44_lidar<<tmp[0],tmp[1],tmp[2],tmp[3],
+            tmp[4],tmp[5],tmp[6],tmp[7],
+            tmp[8],tmp[9],tmp[10],tmp[11],
+            tmp[12],tmp[13],tmp[14],tmp[15];
+
+        T_body_lidar=Sophus::SE3d(M44_lidar);
+        tmp=config["calibration"]["T_body_gt"].as<std::vector<double>>();
+        Eigen::Matrix4d M44_gt;
+        M44_gt<<tmp[0],tmp[1],tmp[2],tmp[3],
+            tmp[4],tmp[5],tmp[6],tmp[7],
+            tmp[8],tmp[9],tmp[10],tmp[11],
+            tmp[12],tmp[13],tmp[14],tmp[15];
+        T_body_gt=Sophus::SE3d(M44_gt);
+
         // read trajectory config
         init_interval = config["trajectory"]["init_interval"].as<double>();
         seg_interval = config["trajectory"]["seg_interval"].as<double>();
@@ -54,8 +75,14 @@ namespace traj {
         // vis
         frame_num=config["vis"]["frame_num"].as<int>();
         point_num=config["vis"]["point_num"].as<int>();
-//        width = config["vis"]["width"].as<int>();
-//        height = config["vis"]["height"].as<int>();
+
+        tmp=config["vis"]["T_vis_lidar"].as<std::vector<double>>();
+        Eigen::Matrix4d M44_vis;
+        M44_vis<<tmp[0],tmp[1],tmp[2],tmp[3],
+            tmp[4],tmp[5],tmp[6],tmp[7],
+            tmp[8],tmp[9],tmp[10],tmp[11],
+            tmp[12],tmp[13],tmp[14],tmp[15];
+        T_vis_lidar=Sophus::SE3d(M44_vis);
     }
 
 }

@@ -152,7 +152,28 @@ void TrajLOdometry::Start() {
       trajectory_.emplace_back(kv.first, kv.second.getPose());
     }
 
-    // Here, you can save the trajectory for comparision
+    // Here, you can save the trajectory for comparison
+    if(config_.save_pose){
+      std::cout << "Start Pose Saving!" << std::endl;
+      std::ofstream os(config_.pose_file_path);
+      os << "# timestamp tx ty tz qx qy qz qw" << std::endl;
+
+      for(const auto& p:trajectory_){
+        Sophus::SE3d pose_body=config_.T_body_lidar*p.second*config_.T_body_lidar.inverse();
+        Sophus::SE3d pose_gt=pose_body*config_.T_body_gt;
+
+        os << std::scientific << std::setprecision(18)
+           << p.first * 1e-9 << " " << pose_gt.translation().x()
+           << " " << pose_gt.translation().y() << " "
+           << pose_gt.translation().z() << " "
+           << pose_gt.so3().unit_quaternion().x() << " "
+           << pose_gt.so3().unit_quaternion().y() << " "
+           << pose_gt.so3().unit_quaternion().z() << " "
+           << pose_gt.so3().unit_quaternion().w() << std::endl;
+      }
+      os.close();
+      std::cout << "Finish Pose Saving!" << std::endl;
+    }
 
     isFinish = true;
     std::cout << "Finisher LiDAR Odometry " << std::endl;
