@@ -4,6 +4,19 @@ dataset:
   data_type: "bag_livox"
   topic: "/livox/lidar"
   path: "/home/zx/Data/Disk1/fast-lio/pendulum.bag"
+  save_pose: true
+  pose_file_path: "estimated_pose.txt"
+
+calibration:
+  time_offset: 0.0
+  T_body_lidar: [ 1.0,  0.0,  0.0, 0.0,
+                  0.0,  1.0,  0.0,  0.0,
+                  0.0,  0.0,  1.0,  0.0,
+                  0.0,  0.0,  0.0,  1.0 ]
+  T_body_gt: [ 1.0,  0.0,  0.0, 0.0,
+               0.0,  1.0,  0.0,  0.0,
+               0.0,  0.0,  1.0,  0.0,
+               0.0,  0.0,  0.0,  1.0 ]
 
 trajectory:
   init_interval: 0.5e8
@@ -25,5 +38,8 @@ mapping:
 vis:
   frame_num: 3
   point_num: 5
-
+  T_vis_lidar: [ 1.0,  0.0,  0.0, 0.0,
+                 0.0,  1.0,  0.0,  0.0,
+                 0.0,  0.0,  1.0,  0.0,
+                 0.0,  0.0,  0.0,  1.0 ]
 

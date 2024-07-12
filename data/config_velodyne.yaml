@@ -6,6 +6,19 @@ dataset:
   data_type: "bag_velodyne"
   topic: "/velodyne_points"
   path: "/home/zx/Data/Disk2/ICCV2023-LIO-Challenage/SubT_MRS_Final_Challenge_UGV1/subset.bag"
+  save_pose: true
+  pose_file_path: "estimated_pose.txt"
+
+calibration:
+  time_offset: 0.0
+  T_body_lidar: [ 1.0,  0.0,  0.0, 0.0,
+                  0.0,  1.0,  0.0,  0.0,
+                  0.0,  0.0,  1.0,  0.0,
+                  0.0,  0.0,  0.0,  1.0 ]
+  T_body_gt: [ 1.0,  0.0,  0.0, 0.0,
+               0.0,  1.0,  0.0,  0.0,
+               0.0,  0.0,  1.0,  0.0,
+               0.0,  0.0,  0.0,  1.0 ]
 
 trajectory:
   init_interval: 3e8
@@ -27,7 +40,10 @@ mapping:
 vis:
   frame_num: 1
   point_num: 5
-
+  T_vis_lidar: [ 1.0,  0.0,  0.0, 0.0,
+                 0.0,  1.0,  0.0,  0.0,
+                 0.0,  0.0,  1.0,  0.0,
+                 0.0,  0.0,  0.0,  1.0 ]
 
 
 

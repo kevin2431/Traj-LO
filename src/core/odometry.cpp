@@ -137,7 +137,7 @@ void TrajLOdometry::Start() {
                         frame_poses_[tp.second].getPose()};
             UndistortRawPoints(measure->points, visData->data, pp);
 
-            visData->T_w = pp.first;
+            visData->T_w = config_.T_vis_lidar*pp.first;
             vis_data_queue->push(visData);  // may block the thread
           }
         }

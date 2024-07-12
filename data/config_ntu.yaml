@@ -3,7 +3,7 @@ dataset:
   topic: "/os1_cloud_node1/points"
   path: "/home/zx/Data/Disk2/NTU_VIRAL/eee_03/eee_03.bag"
   save_pose: true
-  pose_file_path: "test_tum.txt"
+  pose_file_path: "estimated_pose.txt"
 
 calibration:
   time_offset: 0.1
@@ -17,13 +17,13 @@ calibration:
                0.0,  0.0,  0.0,  1.0 ]
 
 trajectory:
-  init_interval: 3e8
+  init_interval: 2e8
   seg_interval: 4e7
   seg_num: 3
-  kinematic_constrain: 2.0
+  kinematic_constrain: 2
   init_pose_weight: 1e9
   converge_thresh: 0.001
-  max_iterations: 50
+  max_iterations: 25
 
 mapping:
   ds_size: 0.8
@@ -36,9 +36,9 @@ mapping:
 vis:
   frame_num: 1
   point_num: 5
-  T_vis_lidar: [ -1.0,  0.0,  0.0, 0.0,
-                 0.0,  0.0,  1.0,  0.0,
-                 0.0,  1.0,  0.0,  0.0,
+  T_vis_lidar: [ 0.0,  1.0,  0.0, 0.0,
+                 1.0,  0.0,  0.0,  0.0,
+                 0.0,  0.0,  -1.0,  0.0,
                  0.0,  0.0,  0.0,  1.000 ]
 
 

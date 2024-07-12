@@ -4,6 +4,19 @@ dataset:
   data_type: "bag_ouster"
   topic: "/os_cloud_node/points"
   path: "/home/zx/Data/Disk2/hilti-2021/Campus_2.bag"
+  save_pose: true
+  pose_file_path: "estimated_pose.txt"
+
+calibration:
+  time_offset: 0.0
+  T_body_lidar: [ 1.0,  0.0,  0.0, 0.0,
+                  0.0,  1.0,  0.0,  0.0,
+                  0.0,  0.0,  1.0,  0.0,
+                  0.0,  0.0,  0.0,  1.0 ]
+  T_body_gt: [ 1.0,  0.0,  0.0, 0.0,
+               0.0,  1.0,  0.0,  0.0,
+               0.0,  0.0,  1.0,  0.0,
+               0.0,  0.0,  0.0,  1.0 ]
 
 trajectory:
   init_interval: 3e8
@@ -25,7 +38,10 @@ mapping:
 vis:
   frame_num: 1
   point_num: 10
-
+  T_vis_lidar: [ 1.0,  0.0,  0.0, 0.0,
+                 0.0,  1.0,  0.0,  0.0,
+                 0.0,  0.0,  1.0,  0.0,
+                 0.0,  0.0,  0.0,  1.0 ]
 
 
 
